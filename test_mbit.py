@@ -827,4 +827,5 @@ def personality_decider():
     if letters_collector == "ESFP": personalityESFP()
 
 
+
 print(name_function())
