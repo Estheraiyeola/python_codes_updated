@@ -11,10 +11,12 @@ geopolitical_zone = {
 
 def get_political_zone(required_state):
     global geopolitical_zone
+    required_state = required_state.lower().capitalize()
     for key in geopolitical_zone.keys():
         for pair in geopolitical_zone[key]:
             if pair == required_state:
                 return key
+    return 'Invalid State'
 
 
 def collect_state():

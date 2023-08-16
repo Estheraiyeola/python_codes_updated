@@ -93,9 +93,9 @@ def display_information():
 
 
 def verifies_information_of_card():
-    print(collect_card_number())
+    collect_card_number()
     get_the_type_of_card()
-    print(converts_string_into_an_array())
+    converts_string_into_an_array()
     validator_algorithm()
     display_information()
 
