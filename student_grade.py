@@ -5,6 +5,7 @@ no_of_students = 0
 no_of_subjects = 0
 storage = []
 average_storage = []
+position = []
 
 
 def collect_no_of_students_and_subjects():
@@ -32,7 +33,7 @@ def saving_method():
                  "[■■■■■■■□□□]", "[■■■■■■■■□□]", "[■■■■■■■■■□]", "[■■■■■■■■■■]"]
 
     for i in range(len(animation)):
-        time.sleep(0.2)
+        time.sleep(0.01)
         sys.stdout.write("\r" + animation[i % len(animation)])
         sys.stdout.flush()
     print("\n")
@@ -102,14 +103,43 @@ def average_for_each_subject():
     average_storage.append(average_storage_for_each_subject)
     return average_storage
 
+
+def position_calculator():
+    global average_storage, no_of_subjects
+    temp_storage = []
+    for i in average_storage[0]:
+        temp_storage.append(i)
+
+    for index in average_storage[0]:
+        for idx in temp_storage:
+            if index < idx:
+                temp = idx
+                idx = index
+                index = temp
+
+    for index in range(len(average_storage[0])):
+        for idx in range(len(temp_storage)):
+            if average_storage[0][idx] == temp_storage[index]:
+                storage[idx][no_of_subjects + 1] = index + 1
+
+
 def display_table():
-    global  no_of_students, no_of_subjects, storage
-    print('STUDENT\t\t')
+    global no_of_students, no_of_subjects, storage, average_storage
+    print('STUDENT\t\t', end='')
     for index in range(no_of_subjects):
-        print(f'SUB{index}')
-    print('TOT\t\t')
-    print('AVE\t\t')
-    print('POS\t')
+        print(f'SUB{index + 1}\t', end='')
+    print('TOT\t\t', end='')
+    print('AVE\t\t', end='')
+    print('POS\t', end='\n')
+    for index in range(no_of_students):
+        print('Student', index + 1, end='\t')
+        for idx in range(no_of_subjects + 1):
+            print(storage[index][idx], end='\t\t')
+        print(average_storage[0][index], end='\t\t')
+        print(storage[index][no_of_subjects + 1])
+        print()
+
+
 collect_no_of_students_and_subjects()
 create_storage_for_students_subject()
 saving_method()
@@ -118,5 +148,5 @@ total_for_each_student()
 total_for_each_subject()
 average_for_each_student()
 average_for_each_subject()
+position_calculator()
 display_table()
-
